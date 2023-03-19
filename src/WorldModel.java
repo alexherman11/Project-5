@@ -29,16 +29,29 @@ public final class WorldModel {
     private static final int PROPERTY_ROW = 3;
     private static final int ENTITY_NUM_PROPERTIES = 4;
 
+//    ADDITIONAL ENTITIES
+
+    private static final String DOG_KEY = "dog";
+    private static final int DOG_ANIMATION_PERIOD = 0;
+    private static final int DOG_ACTION_PERIOD = 1;
+    private static final int DOG_NUM_PROPERTIES = 2;
+
+    private static final String ED_KEY = "ed";
+    private static final int ED_ACTION_PERIOD = 0;
+    private static final int ED_ANIMATION_PERIOD = 1;
+    private static final int ED_LIMIT = 2;
+    private static final int ED_NUM_PROPERTIES = 3;
+
     public static final String TREE_KEY = "tree";
     private static final int TREE_ANIMATION_PERIOD = 0;
     private static final int TREE_ACTION_PERIOD = 1;
     private static final int TREE_HEALTH = 2;
     private static final int TREE_NUM_PROPERTIES = 3;
 
-    private static final String FAIRY_KEY = "fairy";
-    private static final int FAIRY_ANIMATION_PERIOD = 0;
-    private static final int FAIRY_ACTION_PERIOD = 1;
-    private static final int FAIRY_NUM_PROPERTIES = 2;
+    public static final String FAIRY_KEY = "fairy";
+    public static final int FAIRY_ANIMATION_PERIOD = 0;
+    public static final int FAIRY_ACTION_PERIOD = 1;
+    public static final int FAIRY_NUM_PROPERTIES = 2;
 
     public static final int SAPLING_HEALTH_LIMIT = 5;
 
@@ -101,10 +114,31 @@ public final class WorldModel {
                 case TREE_KEY -> parseTree(properties, pt, id, imageStore);
                 case SAPLING_KEY -> parseSapling(properties, pt, id, imageStore);
                 case STUMP_KEY -> parseStump(properties, pt, id, imageStore);
+                // ADDED
+                case DOG_KEY -> parseDog(properties, pt, id, imageStore);
+                case ED_KEY -> parseEd(properties, pt, id, imageStore);
                 default -> throw new IllegalArgumentException("Entity key is unknown");
             }
         }else{
             throw new IllegalArgumentException("Entity must be formatted as [key] [id] [x] [y] ...");
+        }
+    }
+
+    private void parseDog(String[] properties, Point pt, String id, ImageStore imageStore) {
+        if (properties.length == DOG_NUM_PROPERTIES) {
+            Dog dog = new Dog(id, pt, Double.parseDouble(properties[DOG_ACTION_PERIOD]), Double.parseDouble(properties[DOG_ANIMATION_PERIOD]), imageStore.getImageList(DOG_KEY));
+            tryAddEntity(dog);
+        }else{
+            throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", DOG_KEY, DOG_NUM_PROPERTIES));
+        }
+    }
+
+    private void parseEd(String[] properties, Point pt, String id, ImageStore imageStore) {
+        if (properties.length == ED_NUM_PROPERTIES) {
+            Ed entity = new Ed(id, pt, Double.parseDouble(properties[ED_ACTION_PERIOD]), Double.parseDouble(properties[ED_ANIMATION_PERIOD]), Integer.parseInt(properties[ED_LIMIT]), imageStore.getImageList(ED_KEY));
+            tryAddEntity(entity);
+        }else{
+            throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", ED_KEY, ED_NUM_PROPERTIES));
         }
     }
 
