@@ -56,8 +56,8 @@ flowers flowers flowers flowers flowers flowers grass grass grass grass grass gr
 Entities:
     tree  35 27 0.256 1.168 2
     tree  35 25 0.144 1.266 2
-     dog  01 07 0.700 0.600
-      ed  01 06 0.720 0.620 02
+     dog  01 07 0.600 0.500
+      ed  01 06 0.420 0.420 02
 obstacle  13 07 1.126
    fairy  00 00 0.123 0.123
     tree  00 02 0.501 1.289 2
