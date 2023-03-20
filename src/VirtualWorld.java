@@ -81,8 +81,6 @@ public final class VirtualWorld extends PApplet {
             world.background[pressed.y - i][pressed.x - i] = new Background("binary", imageStore.getImageList("binary"));
         }
 
-
-
         System.out.println("CLICK! " + pressed.x + ", " + pressed.y);
         Optional<Entity> entityOptional = world.getOccupant(pressed);
         if (entityOptional.isPresent()) {
