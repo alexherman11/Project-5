@@ -72,6 +72,17 @@ public final class VirtualWorld extends PApplet {
     // Be sure to refactor this method as appropriate
     public void mousePressed() {
         Point pressed = mouseToPoint();
+        for (int i = 0; i < 3; i++) {
+            world.background[pressed.y][pressed.x + i] = new Background("binary", imageStore.getImageList("binary"));
+            world.background[pressed.y][pressed.x - i] = new Background("binary", imageStore.getImageList("binary"));
+            world.background[pressed.y + i][pressed.x] = new Background("binary", imageStore.getImageList("binary"));
+            world.background[pressed.y - i][pressed.x] = new Background("binary", imageStore.getImageList("binary"));
+            world.background[pressed.y + i][pressed.x + i] = new Background("binary", imageStore.getImageList("binary"));
+            world.background[pressed.y - i][pressed.x - i] = new Background("binary", imageStore.getImageList("binary"));
+        }
+
+
+
         System.out.println("CLICK! " + pressed.x + ", " + pressed.y);
         Optional<Entity> entityOptional = world.getOccupant(pressed);
         if (entityOptional.isPresent()) {
